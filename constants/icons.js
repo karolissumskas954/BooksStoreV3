@@ -10,6 +10,13 @@ export const point_icon = require("../assets/icons/point_icon.png");
 export const scan_icon = require("../assets/icons/scan.png");
 export const home_logo = require('../assets/icons/home.png')
 
+export const cart_icon = require("../assets/icons/Cart.png")
+export const user_icon = require("../assets/icons/user.png")
+export const arrow_icon = require("../assets/icons/arrow.png")
+export const plus_icon = require("../assets/icons/plus.png")
+
+
+
 
 
 export default {
@@ -23,5 +30,10 @@ export default {
     page_icon,
     point_icon,
     scan_icon,
-    home_logo
+    home_logo,
+    cart_icon,
+    user_icon,
+    arrow_icon,
+    plus_icon
+
 }
