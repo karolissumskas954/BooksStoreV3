@@ -14,6 +14,11 @@ export const cart_icon = require("../assets/icons/Cart.png")
 export const user_icon = require("../assets/icons/user.png")
 export const arrow_icon = require("../assets/icons/arrow.png")
 export const plus_icon = require("../assets/icons/plus.png")
+export const minus_icon = require("../assets/icons/minus.png")
+export const bookClosed_icon = require("../assets/icons/bookClosed.png")
+export const book = require("../assets/icons/book.png")
+export const language_icon = require("../assets/icons/language.png")
+
 
 
 
@@ -34,6 +39,10 @@ export default {
     cart_icon,
     user_icon,
     arrow_icon,
-    plus_icon
+    plus_icon,
+    minus_icon,
+    book,
+    bookClosed_icon,
+    language_icon
 
 }
