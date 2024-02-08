@@ -18,6 +18,7 @@ export const minus_icon = require("../assets/icons/minus.png")
 export const bookClosed_icon = require("../assets/icons/bookClosed.png")
 export const book = require("../assets/icons/book.png")
 export const language_icon = require("../assets/icons/language.png")
+export const menu_icon = require("../assets/icons/menu.png")
 
 
 
@@ -43,6 +44,7 @@ export default {
     minus_icon,
     book,
     bookClosed_icon,
-    language_icon
+    language_icon,
+    menu_icon
 
 }

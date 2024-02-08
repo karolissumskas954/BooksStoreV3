@@ -10,7 +10,8 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
-  LogBox
+  LogBox,
+  TextInput
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { COLORS, FONTS, SIZES, icons } from '../../constants';
@@ -54,6 +55,70 @@ const HomeScreen = () => {
 
   const [blogs, setBlogs] = useState([
     {
+      author: 'Rick Rubin',
+      pages: '250',
+      title: 'The Creative Act : A Way of Beiing',
+      price: '€21,25',
+      uri: 'https://thumb.knygos-static.lt/G6R3hxv-7r8Lm3h1H8H19-JkJG8=/fit-in/0x800/images/books/5371823/9781838858636.jpg',
+      language: 'English'
+    },
+    {
+      author: 'Icy Sedgwick',
+      pages: '192',
+      title: 'Rebel Folklore',
+      price: '€25,30',
+      uri: 'https://m.media-amazon.com/images/I/81HqhBWmNGL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
+      author: 'Madeleine Gray',
+      pages: '386',
+      title: 'Green Dot',
+      price: '€18,00',
+      uri: 'https://m.media-amazon.com/images/I/81AkR4qgEoL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
+      author: 'Rebecca Yarros',
+      pages: '620',
+      title: 'Iron Flame',
+      price: '€21,60',
+      uri: 'https://m.media-amazon.com/images/I/912fTvsUKLL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
+      author: 'David Shrier',
+      pages: '250',
+      title: 'Basic AI',
+      price: '€16,00',
+      uri: 'https://m.media-amazon.com/images/I/71d0LQqNrbL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
+      author: 'Russell Norman',
+      pages: '320',
+      title: 'Brutto',
+      price: '€35,00',
+      uri: 'https://m.media-amazon.com/images/I/71mTm0CPoYL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
+      author: 'Juan Gomez',
+      pages: '500',
+      title: 'Red Queen',
+      price: '€11,70',
+      uri: 'https://m.media-amazon.com/images/I/71IGFdWz4WL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
+      author: 'Olivie Blake',
+      pages: '560',
+      title: 'The Atlas Paradox',
+      price: '€11,70',
+      uri: 'https://m.media-amazon.com/images/I/81ljNfBo4NL._SL1500_.jpg',
+      language: 'English'
+    },
+    {
       author: 'Katsuhiro',
       pages: '296',
       title: 'Akira, Vol. 2',
@@ -93,11 +158,37 @@ const HomeScreen = () => {
         justifyContent: 'space-between'
       }}>
         {/* Greetings */}
-        <View style={{ flex: 1 }}>
-          <View style={{ marginRight: SIZES.padding }}>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: COLORS.white,
+              height: 55,
+              width: 55,
+              borderRadius: 75,
+              marginRight: 5
+            }}
+          //   onPress={handleSignOut}
+          >
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <Image
+                source={icons.menu_icon}
+                style={{ width: 20, height: 20, tintColor: COLORS.black }}
+              />
+            </View>
+          </TouchableOpacity>
+
+          {/* Search bar */}
+
+          {/* <SafeAreaView style={{flex: 1, marginTop: 5}}>
+          <TextInput style={{height: 45, padding:10, marginRight: 10, marginLeft: 5, borderRadius: 75, backgroundColor: COLORS.lightGray3}} />
+        </SafeAreaView> */}
+
+
+
+          {/* <View style={{ marginRight: SIZES.padding }}>
             <Text style={{ fontFamily: 'Lufga_SemiBold', fontSize: 30, color: COLORS.black }}>Books 003</Text>
             <Text style={{ fontFamily: 'Lufga_Regular', fontSize: 18, color: COLORS.darkGray, paddingLeft: 2 }}>Book Store</Text>
-          </View>
+          </View> */}
         </View>
         {/* Log out */}
         <TouchableOpacity
@@ -157,7 +248,7 @@ const HomeScreen = () => {
           shadowRadius: 4.65,
         }}>
           <FlatList
-            data={blogs}
+            data={blogs.slice(0, 6)}
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item, index }) => {
@@ -169,7 +260,7 @@ const HomeScreen = () => {
                     resizeMode="cover"
                     style={{ width: SIZES.width - 55, height: 500, borderRadius: 30, zIndex: 1 }} />
                   <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 150, backgroundColor: 'rgba(0, 0, 0, 0.7)', zIndex: 2, borderRadius: 30 }}>
-                    <View style={{ flexDirection: 'row', paddingLeft: 16, paddingRight: 16, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+                    <View style={{ flexDirection: 'row', paddingLeft: 16, paddingRight: 16, justifyContent: 'center', alignItems: 'center', marginTop: 12 }}>
                       <View style={{ flex: 1, flexDirection: 'column' }}>
                         <Text style={{ color: COLORS.white, fontFamily: 'Lufga_SemiBold', fontSize: 24 }}>{item.title}</Text>
                       </View>
@@ -191,12 +282,12 @@ const HomeScreen = () => {
                         </View>
                       </TouchableOpacity>
                     </View>
-                    <View style={{ flexDirection: 'row', paddingLeft: 16, paddingRight: 16, justifyContent: 'center', alignItems: 'center', marginTop: 8 }}>
-                      <View style={{ flex: 1, flexDirection: 'column' }}>
+                    <View style={{ flexDirection: 'row', paddingLeft: 16, paddingRight: 16, justifyContent: 'center', alignItems: 'center', marginTop: 8, paddingBottom: 2 }}>
+                      <View style={{ flex: 3, flexDirection: 'column' }}>
                         <Text style={{ color: COLORS.white, fontFamily: 'Lufga_Regular', fontSize: 16 }}>Author</Text>
                         <Text style={{ color: COLORS.white, fontFamily: 'Lufga_SemiBold', fontSize: 18 }}>{item.author}</Text>
                       </View>
-                      <View style={{ flex: 1, flexDirection: 'column' }}>
+                      <View style={{ flex: 2, flexDirection: 'column', marginLeft: 10 }}>
                         <Text style={{ color: COLORS.white, fontFamily: 'Lufga_Regular', fontSize: 16 }}>Price</Text>
                         <Text style={{ color: COLORS.white, fontFamily: 'Lufga_SemiBold', fontSize: 18 }}>{item.price}</Text>
                       </View>
@@ -328,10 +419,10 @@ const HomeScreen = () => {
   function renderCategoryData() {
     var start = 0
     var end = 4
-    if (selectedCategory == 0) {
+    if (selectedCategory == 1) {
       start = 0
       end = 4
-    } else if (selectedCategory == 1) {
+    } else if (selectedCategory == 0) {
       start = 4
       end = 8
 
@@ -342,7 +433,7 @@ const HomeScreen = () => {
     return (
       <View style={{ flex: 1, marginTop: 12, paddingLeft: 24 }}>
         <FlatList
-          data={blogs}
+          data={blogs.slice(start, end)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={{ marginVertical: 8 }}>
@@ -354,25 +445,25 @@ const HomeScreen = () => {
                 <Image
                   source={{ uri: item.uri }}
                   resizeMode='cover'
-                  style={{ width: 100, height: 150, borderRadius: 10 }}
+                  style={{ width: 100, height: 130, borderRadius: 10 }}
                 />
                 <View style={{ flex: 1, marginLeft: 12, flexDirection: 'column' }}>
                   {/* Book name and author  */}
                   <View>
-                    <Text style={{ paddingRight: SIZES.padding, fontFamily: 'Lufga_Bold', fontSize: 22, color: COLORS.black }}>{item.title}</Text>
-                    <Text style={{ fontFamily: 'Lufga_Bold', fontSize: 16, color: COLORS.lightGray }}>{item.author}</Text>
-                    <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                      <Image source={icons.bookClosed_icon}
+                    <Text style={{ paddingRight: SIZES.padding, fontFamily: 'Lufga_Bold', fontSize: 22, color: COLORS.black, marginTop: 5 }}>{item.title}</Text>
+                    <Text style={{ fontFamily: 'Lufga_Bold', fontSize: 16, color: COLORS.lightGray, marginTop: 5 }}>{item.author}</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                      {/* <Image source={icons.bookClosed_icon}
                         style={{ width: 20, height: 20, tintColor: COLORS.black, marginTop: 2 }}
-                      />
-                      <Text style={{ fontFamily: 'Lufga_Regular', fontSize: 18, color: COLORS.black, marginBottom: 5, marginLeft: 5 }}>{item.pages}</Text>
+                      /> */}
+                      {/* <Text style={{ fontFamily: 'Lufga_Regular', fontSize: 18, color: COLORS.black}}>{item.price}</Text> */}
                     </View>
-                    <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                    {/* <View style={{ flexDirection: 'row', marginTop: 3 }}>
                       <Image source={icons.language_icon}
                         style={{ width: 25, height: 20, tintColor: COLORS.black, marginTop: 2 }}
                       />
                       <Text style={{ fontFamily: 'Lufga_Regular', fontSize: 18, color: COLORS.black, marginBottom: 5, marginLeft: 5 }}>{item.language}</Text>
-                    </View>
+                    </View> */}
                   </View>
                   {/* Data  */}
                   <View style={{ position: 'absolute', bottom: 10 }}>
