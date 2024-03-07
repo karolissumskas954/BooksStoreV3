@@ -11,19 +11,22 @@ import {
   SafeAreaView,
   StatusBar,
   LogBox,
-  TextInput
+  TextInput,
+  Animated
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { COLORS, FONTS, SIZES, icons } from '../../constants';
 import { useFonts } from 'expo-font';
 import Modal from 'react-native-modal';
 import { useNavigation } from '@react-navigation/core';
 import Carousel from 'react-native-reanimated-carousel';
 import { LinearGradient } from 'expo-linear-gradient';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 LogBox.ignoreLogs(['fontFamily "Roboto-Regular" is not a system font and has not been loaded through Font.loadAsync.']);
 LogBox.ignoreLogs(['fontFamily "Roboto-Bold" is not a system font and has not been loaded through Font.loadAsync.'])
-const HomeScreen = () => {
+const HomeScreen = ({}) => {
 
   const [deleteModal, setDeleteModal] = useState(false)
   const [selItem, setSetItem] = useState('')
@@ -57,10 +60,11 @@ const HomeScreen = () => {
     {
       author: 'Rick Rubin',
       pages: '250',
-      title: 'The Creative Act : A Way of Beiing',
+      title: 'The Creative Act : A Way of Being',
       price: '€21,25',
       uri: 'https://thumb.knygos-static.lt/G6R3hxv-7r8Lm3h1H8H19-JkJG8=/fit-in/0x800/images/books/5371823/9781838858636.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Many famed music producers are known for a particular sound that has its day and then ages out. Rick Rubin is known for something else: creating a space where artists of all different genres and traditions can home in on who they really are and what they really offer. He has made a practice of helping people transcend their self-imposed expectations in order to reconnect with a state of innocence from which the surprising becomes inevitable."
     },
     {
       author: 'Icy Sedgwick',
@@ -68,7 +72,8 @@ const HomeScreen = () => {
       title: 'Rebel Folklore',
       price: '€25,30',
       uri: 'https://m.media-amazon.com/images/I/81HqhBWmNGL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Madeleine Gray',
@@ -76,7 +81,8 @@ const HomeScreen = () => {
       title: 'Green Dot',
       price: '€18,00',
       uri: 'https://m.media-amazon.com/images/I/81AkR4qgEoL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Rebecca Yarros',
@@ -84,7 +90,8 @@ const HomeScreen = () => {
       title: 'Iron Flame',
       price: '€21,60',
       uri: 'https://m.media-amazon.com/images/I/912fTvsUKLL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'David Shrier',
@@ -92,7 +99,8 @@ const HomeScreen = () => {
       title: 'Basic AI',
       price: '€16,00',
       uri: 'https://m.media-amazon.com/images/I/71d0LQqNrbL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Russell Norman',
@@ -100,7 +108,8 @@ const HomeScreen = () => {
       title: 'Brutto',
       price: '€35,00',
       uri: 'https://m.media-amazon.com/images/I/71mTm0CPoYL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Juan Gomez',
@@ -108,7 +117,8 @@ const HomeScreen = () => {
       title: 'Red Queen',
       price: '€11,70',
       uri: 'https://m.media-amazon.com/images/I/71IGFdWz4WL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Olivie Blake',
@@ -116,7 +126,8 @@ const HomeScreen = () => {
       title: 'The Atlas Paradox',
       price: '€11,70',
       uri: 'https://m.media-amazon.com/images/I/81ljNfBo4NL._SL1500_.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Katsuhiro',
@@ -124,7 +135,8 @@ const HomeScreen = () => {
       title: 'Akira, Vol. 2',
       price: '€33,00',
       uri: 'https://www.fujidream.lt/wp-content/uploads/2022/04/91O9TUYe9L-600x856.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Kentaro Miura',
@@ -132,7 +144,8 @@ const HomeScreen = () => {
       title: 'Berserk, Vol. 26',
       price: '€12,29',
       uri: 'https://www.fujidream.lt/wp-content/uploads/2021/08/91LR4w9B-hL-e1627763254808-600x848.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
     {
       author: 'Gege Akutami',
@@ -140,13 +153,16 @@ const HomeScreen = () => {
       title: 'Jujutsu Kaisen, Vol. 0',
       price: '€10,29',
       uri: 'https://www.fujidream.lt/wp-content/uploads/2021/08/81EFJlUUAuL-600x900.jpg',
-      language: 'English'
+      language: 'English',
+      description: "Rebel Folklore gathers 50 of the darkest and most complicated folktale characters from around the world, showing readers why we should care about the rebels and misfits of ancient stories. Folktales were humble stories, passed down generations by those on the fringes of society: women, peasants, outcast groups. Across the world, these ancient stories are filled with strange characters, complicated figures who hold up a mirror to the world that dreamt them up. From outspoken women cast as witches to anti-authority figures denounced as criminals, flawed heroes to relatable villains, Rebel Folklore celebrates 50 of these misfits and what they mean for us today. Whether it's Muma Padurii, the Romanian forest witch who terrorizes trespassers to protect the environment, the Churel, who stalks unfaithful men on her backwards feet, or Robin Hood, everyone's favourite lawless activist, we can learn a lot from the rebels of days gone by: how to speak out, embrace our flaws, and be unashamedly ourselves - even if that means being a cannibalistic swamp witch."
     },
 
   ])
   const navigation = useNavigation()
   const [categories, setCategory] = React.useState(categoriesData);
   const [selectedCategory, setSelectedCategory] = React.useState(0);
+
+ 
 
   function renderHeader(profile) {
     return (
@@ -167,7 +183,7 @@ const HomeScreen = () => {
               borderRadius: 75,
               marginRight: 5
             }}
-          //   onPress={handleSignOut}
+          onPress={() => navigation.toggleDrawer()}
           >
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <Image
@@ -298,7 +314,7 @@ const HomeScreen = () => {
                           width: 55,
                           borderRadius: 75,
                         }}
-                      //   onPress={handleSignOut}
+                        onPress={() => navigation.navigate("Book", item)}
                       >
                         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                           <Image
@@ -439,7 +455,7 @@ const HomeScreen = () => {
             <View style={{ marginVertical: 8 }}>
               <TouchableOpacity
                 style={{ flex: 1, flexDirection: 'row' }}
-              // onPress={() => navigation.navigate("Book", item)}
+              onPress={() => navigation.navigate("Book", item)}
               >
                 {/* Book cover  */}
                 <Image
@@ -485,10 +501,10 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background, }}>
+
       {/* <StatusBar barStyle="light-content" /> */}
       <View style={{ height: 90, marginTop: 20, }}>
         {renderHeader('User')}
-
         {/* {renderButtonSection()} */}
       </View>
       {/* Body section */}
@@ -521,6 +537,7 @@ const HomeScreen = () => {
           </View>
         </View>
       </ScrollView>
+
     </SafeAreaView>
   )
 }
